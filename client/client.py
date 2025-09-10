@@ -86,4 +86,14 @@ class Client:
             str: The client's email address.
         """
         return self.__email_address
+    
+    def __str__(self, client_number: int, first_name: str,
+                  last_name: str, email_address: str):
+        """
+        Returns the informal string representaion of the client information (# ask if object).
+
+        Returns:
+            str: the informal string representation of client information (# aks if object).
+        """
         
+        return (f"{last_name}, {first_name} [{client_number}] - {email_address}")
