@@ -36,9 +36,27 @@ class BankAccount:
         else:
             raise ValueError("Balance must be numeric.")
         
-        if float(balance) > 0:
+        if float(balance):
             self.__balance = balance
         else:
             balance = 0
             self.__balance = balance
+
+        @property
+        def account_number(self) -> int:
+            """
+            """
+            return self.__account_number
+        
+        @property
+        def client_number(self) -> int:
+            """
+            """
+            return self.__client_number
+        
+        @property
+        def balance(self) -> float:
+            """
+            """
+            return self.__balance
         
