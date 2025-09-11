@@ -38,10 +38,10 @@ class Client:
         else:
             raise ValueError("Last name must not be blank")
         
-        email = "Joanne.Sinclair@Pixel-River.COM"
+        email = "Joanne.Sinclair@pixel-river.com"
 
         try:
-            validate_email = validate_email(email, check_deiverability = False)
+            validated_email = validate_email(email, check_deliverability = False)
             self.__email_address = email_address
         except EmailNotValidError:
             self.__email_address = "email@pixell-river.com"
@@ -87,13 +87,13 @@ class Client:
         """
         return self.__email_address
     
-    def __str__(self, client_number: int, first_name: str,
-                  last_name: str, email_address: str):
+    def __str__(self):
         """
-        Returns the informal string representaion of the client information (# ask if object).
+        Returns the informal string representaion of the client information (object)
 
         Returns:
-            str: the informal string representation of client information (# aks if object).
+            str: the informal string representation of client information .
         """
         
-        return (f"{last_name}, {first_name} [{client_number}] - {email_address}")
+        return (f"{self.__last_name}, {self.__first_name}"
+               + f" [{self.__client_number}] - {self.__email_address}\n")
