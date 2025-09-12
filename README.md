@@ -5,7 +5,7 @@ Ultimately, an entire system will be created to manage bank transactions
 for clients who have one or more bank accounts.
 
 ## Author
-Sven Beienger
+Sven Beitenger
 
 ## Assignment
 Assignment 1: This assignment will be using encapsulation and unit testing to 
