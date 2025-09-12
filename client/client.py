@@ -1,5 +1,5 @@
 """
-Description:
+Description: A class to manage Client objects
 """
 
 __author__ = "Sven Beitegner"
@@ -10,7 +10,7 @@ from email_validator import validate_email, EmailNotValidError
 
 class Client:
     """
-    Client class:
+    Client class: Represents the clients information.
     """
     
     def __init__(self, client_number: int, first_name: str,
@@ -41,7 +41,8 @@ class Client:
         email = "Joanne.Sinclair@pixel-river.com"
 
         try:
-            validated_email = validate_email(email, check_deliverability = False)
+            validated_email = validate_email(email,
+                                            check_deliverability = False)
             self.__email_address = email_address
         except EmailNotValidError:
             self.__email_address = "email@pixell-river.com"
@@ -89,10 +90,11 @@ class Client:
     
     def __str__(self):
         """
-        Returns the informal string representaion of the client information (object)
+        Returns the informal string representaion of the client
+        information (object).
 
         Returns:
-            str: the informal string representation of client information .
+            str: The informal string representation of client information.
         """
         
         return (f"{self.__last_name}, {self.__first_name}"
