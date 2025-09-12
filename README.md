@@ -8,4 +8,10 @@ Sven Beienger
 Assignment 1: This assignment will be using encapsulation and unit testing to build a complete system.
 
 ## Encapsulation
-[use this section to explain how Encapsulation was achieved in the BankAccount class.]
+Encapsulation was achieved by making 'private' attributes. Namemangling the in
+the constructor by adding double underscore to the atrributes, and then creating
+getter properties so I can access the attributes without accidentally bypassing
+encapsulation and messing with attribute directly. I am using getter propeties
+so I can prevent direct access and raise valuerrors if the wrong argument was
+entered. Within all my functions in the BankAccount class I am using the
+namemagled attributes.
