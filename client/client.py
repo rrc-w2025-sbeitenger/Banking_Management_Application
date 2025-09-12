@@ -26,17 +26,17 @@ class Client:
         if isinstance(client_number, int):
             self.__client_number = client_number
         else:
-            raise ValueError("Client number must be numeric.")
+            raise ValueError("Client number must be numeric.\n")
         
         if len(first_name.strip()) > 0:
             self.__first_name = first_name
         else:
-            raise ValueError("First name must not be blank.")
+            raise ValueError("First name must not be blank.\n")
         
         if len(last_name.strip()) > 0:
             self.__last_name = last_name
         else:
-            raise ValueError("Last name must not be blank")
+            raise ValueError("Last name must not be blank\n")
         
         email = "Joanne.Sinclair@pixel-river.com"
 

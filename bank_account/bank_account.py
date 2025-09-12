@@ -31,15 +31,6 @@ class BankAccount:
         else:
             raise ValueError("Client number must be numeric.")
         
-        #if isinstance(balance, (int, float)):
-        #    self.__balance = balance
-        #else:
-        #   raise ValueError("Balance must be numeric.")
-        
-        #wrapping in a try and expect block since we don't want
-        #to crash the program.
-
-        #COME BACK TO TEST THIS****
         try:
             if float(balance):
                 self.__balance = balance
@@ -82,11 +73,11 @@ class BankAccount:
         """
         if isinstance(amount, (float, int)):
             if amount < 0:
-                raise ValueError(f"Deposit amount: ${amount:,.2f}.2f must be positive.")
+                raise ValueError(f"Deposit amount: -${abs(amount):,.2f} must be positive.\n")
             else:
                 self.update_balance(amount)
         else:
-            raise ValueError(f"Deposit amount: {amount} must be numeric.")
+            raise ValueError(f"Deposit amount: {amount} must be numeric.\n")
 
     def withdraw(self, amount:float):
         """
@@ -95,13 +86,13 @@ class BankAccount:
         if isinstance(amount, (float, int)):
             if amount > self.__balance:
                 raise ValueError(f"Withdraw amount: ${amount:,.2f}"
-                                + f" must not exceed the account balance: ${self.__balance:,.2f}")
+                                + f" must not exceed the account balance: ${self.__balance:,.2f}\n")
             elif amount < 0:
-                raise ValueError(f"Withdraw amount: ${amount:,.2f} must be positive.")
+                raise ValueError(f"Withdraw amount: -${abs(amount):,.2f} must be positive.\n")
             else:
                 self.update_balance(-amount)
         else:
-            raise ValueError(f"Withdraw amount: {amount} must be numeric.")
+            raise ValueError(f"Withdraw amount: {amount} must be numeric.\n")
         
     def __str__(self):
         """
