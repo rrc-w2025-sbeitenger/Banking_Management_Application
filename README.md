@@ -11,6 +11,9 @@ Sven Beitenger
 Assignment 1: This assignment will be using encapsulation and unit testing to 
 build a client and bank account systems.
 
+Assignment 2: This assignment will be using superclasses and subclasses using
+inheritance hierarchy. Will include the use of polymorphism and abstaction.
+
 ## Encapsulation
 Encapsulation was achieved by making 'private' attributes. Name mangling the in
 the constructor by adding double underscore to the atrributes, and then creating
