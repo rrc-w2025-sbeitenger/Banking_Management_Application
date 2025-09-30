@@ -1,28 +1,36 @@
 """
-Description: A class to manage BankAccount objects
+Description: A class to manage BankAccount objects.
 """
 
 __author__ = "Sven Beitegner"
 __version__ = "1.0.0"
 __credits__ = ""
 
-class BankAccount:
+#imports.
+from datetime import date
+from abc import ABC, abstractmethod
+
+#abstact BankAccount class.
+class BankAccount(ABC):
     """
     BankAccount class: Represents clients bank account.
     """
+    
+    #constants
+    BASE_SERVICE_CHARGE: float = 0.50;
 
-    def __init__(self, account_number: int, 
-                 client_number: int, balance: float):
+    def __init__(self, account_number: int, client_number: int,
+                 balance: float, date_created: date):
         """
         Initializes a Bank Account object based on the arguments,
         if they are valid. 
 
-        args:
+        Args:
             account_number (int): Integer value representing the account number.
             client_number (int): Integer value representing the client number.
             balance (float): Float value representing the client's bank account balance.
-        """
 
+        """
         if isinstance(account_number, int):
             self.__account_number = account_number
         else:
@@ -40,6 +48,11 @@ class BankAccount:
             balance = 0
             self.__balance = balance
 
+        if not isinstance(date_created, date):
+            self._date_created.today() = date_created
+        else:
+            self._date_created = date_created
+
     @property
     def account_number(self) -> int:
         """
@@ -47,6 +60,7 @@ class BankAccount:
 
         Returns:
             int: The client's account number.
+
         """
         return self.__account_number
         
@@ -57,6 +71,7 @@ class BankAccount:
 
         Returns:
             int: The client's number.
+
         """
         return self.__client_number
     
@@ -67,6 +82,7 @@ class BankAccount:
 
         Returns:
             int: The client's account balance.
+
         """
         return self.__balance
     
@@ -74,8 +90,9 @@ class BankAccount:
         """
         Updates the client's account balance if amount can be casted to float.
 
-        args:
+        Args:
             amount (float): The transaction amount being entered.
+
         """
         try:
             if float(amount):
@@ -87,7 +104,7 @@ class BankAccount:
         """
         Deposits the client's amount into their account balance.
 
-        ags:
+        Args:
             amount (float): The transaction amount being entered. 
 
         """
@@ -107,8 +124,9 @@ class BankAccount:
         """
         Withdraw the client's amount from their account balance.
 
-        args:
+        Args:
             amount (float): The transaction amount being entered. 
+
         """
         #If amount is instance of float or int, then if amount exceeds
         #balance raise ValueError, elif amount is negative then
@@ -134,6 +152,15 @@ class BankAccount:
 
         Returns:
             str: The informal string representation of client's bank information.
+
         """
         return (f"Account Number: {self.__account_number}" 
                 + f" Balance: ${self.__balance:,.2f}\n")
+    
+    @abstractmethod
+    def get_service_charges(self) -> float:
+        """
+        Abstract method.
+        Implemented in subclasses.
+        """
+        pass
