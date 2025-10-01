@@ -15,7 +15,7 @@ class BankAccount(ABC):
     """
     BankAccount class: Represents clients bank account.
     """
-    
+
     #constants
     BASE_SERVICE_CHARGE: float = 0.50;
 
@@ -99,7 +99,7 @@ class BankAccount(ABC):
                 self.__balance += amount
         except ValueError:
             pass
-        
+         
     def deposit(self, amount:float) -> None:
         """
         Deposits the client's amount into their account balance.
