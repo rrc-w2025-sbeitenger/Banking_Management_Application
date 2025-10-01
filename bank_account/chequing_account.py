@@ -24,7 +24,7 @@ class ChequingAccount(BankAccount):
             account_number (int): Integer value representing the account number.
             client_number (int): Integer value representing the client number.
             balance (float): Float value representing the client's bank account balance.
-            date_created(date): The date of creation.
+            date_created(date): The date of account creation.
             overdraft_limit (float): Overdraft Limit of how much money can be taken out.
             overdraft_rate (float): The pertectage rate of the overdraft.
         
@@ -74,7 +74,7 @@ class ChequingAccount(BankAccount):
 
         Returns:
             service_charge(str): Calculated service charge for clients bank account.
-            
+
         """
         if self._BankAccount__balance >= self.__overdraft_limit:
             service_charge = BankAccount.BASE_SERVICE_CHARGE
