@@ -47,11 +47,15 @@ class BankAccount(ABC):
         except ValueError:
             balance = 0
             self.__balance = balance
-
-        if not isinstance(date_created, date):
-            self._date_created.today() = date_created
-        else:
-            self._date_created = date_created
+        
+        try:
+            if not isinstance(date_created, date):
+                self._date_created = date.today()
+            else:
+                self._date_created = date_created
+        #COME BACK TO
+        except TypeError:
+            self._date_created = date.today()
 
     @property
     def account_number(self) -> int:

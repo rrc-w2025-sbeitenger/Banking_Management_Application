@@ -23,10 +23,14 @@ class ChequingAccount(BankAccount):
         #superclass attributes.
         super().__init__(account_number, client_number, balance, date_created)
 
+        #The maximum amount a balance can be overdrawn (below 0.00)
+        #before overdraft fees are applied.
         try:
             if float(overdraft_limit):
                 self.__overdraft_limit = overdraft_limit
         except:
+            #if overdraft_limit cannot be parsed to a float set a
+            #default of -100.
             overdraft_limit = -100
             self.__overdraft_limit = overdraft_limit
 
@@ -51,12 +55,12 @@ class ChequingAccount(BankAccount):
     def get_service_charges(self) -> float:
         """
         """
-        if self.__balance >= self.__overdraft_limit:
+        if self._BankAccount__balance >= self.__overdraft_limit:
             service_charge = BankAccount.BASE_SERVICE_CHARGE
         
-        if self.__balance < self.__overdraft_limit:
+        if self._BankAccount__balance < self.__overdraft_limit:
             service_charge = (BankAccount.BASE_SERVICE_CHARGE + 
-                             (self.__overdraft_limit - self.__balance)
+                             (self.__overdraft_limit - self._BankAccount__balance)
                              * self.__overdraft_rate)
             
         return service_charge
