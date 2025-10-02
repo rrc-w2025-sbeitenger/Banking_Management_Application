@@ -1,5 +1,5 @@
 """
-Description: A class to chequing
+Description: A class to investment account
 """
 
 __author__ = "Sven Beitegner"
