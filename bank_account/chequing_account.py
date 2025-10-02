@@ -1,5 +1,5 @@
 """
-Description: A class to chequing
+Description: A class to chequing account
 """
 
 __author__ = "Sven Beitegner"
@@ -55,14 +55,14 @@ class ChequingAccount(BankAccount):
 
     def __str__(self) -> str:
         """
-        Formal string repsention of client accounts overdraft.
+        informal string repsention of client accounts overdraft.
 
         Returns:
             (str): Account number with balance, and all overdraft information.
 
         """
         account_and_balance = super().__str__()
-        overdraft_limit_and_rate = (f"Overdraft Limit: ${self.__overdraft_limit:.2f}" +
+        overdraft_limit_and_rate = (f"Overdraft Limit: ${self.__overdraft_limit:,.2f}" +
                                     f" Overdraft Rate: {self.__overdraft_rate * 100:.2f}" +
                                     "% Account Type: Chequing")
 

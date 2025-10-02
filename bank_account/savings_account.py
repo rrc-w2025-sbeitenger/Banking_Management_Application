@@ -20,7 +20,11 @@ class SavingsAccount(BankAccount):
         Initializes class attrbutes to argument values.
 
         Args:
-
+            account_number (int): Integer value representing the account number.
+            client_number (int): Integer value representing the client number.
+            balance (float): Float value representing the client's bank account balance.
+            date_created (date): The date of creation.
+            minimum_balance (float): Minimum balance in savings account.
         
         """
         super().__init__(account_number, client_number, balance, date_created)
@@ -36,23 +40,33 @@ class SavingsAccount(BankAccount):
 
     def __str__(self):
         """
-        informal string rep
+        informal string reresentation of savings bank account.
+
+        Returns:
+            (str): account information, alongside account minimum
+            balance information.
+
         """
         account_info = super().__str__()
-        minimun_balance_info = (f"Account Number: {self._BankAccount__account_number}" +
-                                f" Balance: {self._BankAccount__balance}" +
-                                f" Minimum Balance: {self.__minimum_balance} Account Type: Savings")
+        
+        minimun_balance_info = (f"Minimum Balance:" + 
+                                f" ${self.__minimum_balance:,.2f} Account Type: Savings")
         
         return account_info + minimun_balance_info
 
     def get_service_charges(self):
         """
         service charges for savings account.
+
+        Returns:
+            service_charge (str): Savings bank account fee for
+            using our service.
+
         """
-        if self.__balance >= self.__minimum_balance:
+        if self._BankAccount__balance >= self.__minimum_balance:
             service_charge = BankAccount.BASE_SERVICE_CHARGE
         
-        if self.__balance < self.__minimum_balance:
+        if self._BankAccount__balance < self.__minimum_balance:
             service_charge = (BankAccount.BASE_SERVICE_CHARGE 
                              * self.SERVICE_CHARGE_PREMIUM)
         
