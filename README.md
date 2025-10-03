@@ -22,3 +22,11 @@ encapsulation and messing with attribute directly. I am using getter propeties
 so I can prevent direct access and raise valuerrors if the wrong argument was
 entered. Within all my functions in the BankAccount class I am using the
 name mangled attributes.
+
+## Polymorphism
+Polymorphism was achieved by implementing abstract classes and methods.
+Polymorpism allows subclasses to access the abstract method in the abstract
+superclass. I can declare the abstract get_service_charges method in the
+superclass and then each other subclass, such as ChequingAccount, InvementAccount,
+and SavingsAccount can implement this method differently. I used this to
+create different service charges for each account type.

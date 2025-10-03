@@ -54,10 +54,11 @@ class InvestmentAccount(BankAccount):
         #invoke superclass str
         account_and_balance = super().__str__()
         
-        #if creation date is greater than 10 years
+        #if creation date is less than 10 years.
+        #Sign is swapped since these are dates.
         if self._date_created >= self.TEN_YEARS_AGO:
             fee = f"${self.__management_fee:.2f}"
-        #if creation date is less than 10 years
+        #if creation date is greater than 10 years
         elif self._date_created < self.TEN_YEARS_AGO:
             fee = "wavied"
         
@@ -74,7 +75,7 @@ class InvestmentAccount(BankAccount):
             service_charge (float): Cost of service charge.
 
         """
-        #if creation date is greater than 10 years
+        #if creation date is greater than 10 years.
         if self._date_created < self.TEN_YEARS_AGO:
             service_charge = BankAccount.BASE_SERVICE_CHARGE
         else:
