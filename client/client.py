@@ -16,12 +16,14 @@ class Client:
     def __init__(self, client_number: int, first_name: str,
                   last_name: str, email_address: str):
         """
+        Initializes class attrbutes to argument values.
 
-        agrs:
+        Args:
             client_number: An integer value representing the client number.
             first_name: A string value the client's last name.
             last_name: A  string value the client's last name.
             email_address: A string value the client's email address.
+
         """
         if isinstance(client_number, int):
             self.__client_number = client_number
@@ -73,7 +75,7 @@ class Client:
         """
         Accessor for last_name attribute.
 
-        Returns
+        Returns:
             str: The client's last name.
         """
         return self.__last_name
@@ -83,7 +85,7 @@ class Client:
         """
         Accessor for email_address attribute.
 
-        Returns
+        Returns:
             str: The client's email address.
         """
         return self.__email_address

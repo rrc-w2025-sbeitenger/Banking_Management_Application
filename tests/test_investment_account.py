@@ -1,4 +1,4 @@
-"""This module defines the TestChequingAccount class.
+"""This module defines the TestInvestmentAccount class.
 
 Usage:
     to run all tests type this command:
@@ -42,7 +42,6 @@ class TestInvestmentAccount(unittest.TestCase):
         expected = 0.50
         self.assertEqual(actual, expected)
 
-    ##CHECK IF IT'S SHOULD BE 0.5 OR 3.5
     def test_get_service_charges_creation_date_10_years(self):
         investment_account = InvestmentAccount(1172010, 98765, 80000.85, date(2015, 10, 1), 3)
         actual = investment_account.get_service_charges()

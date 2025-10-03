@@ -14,6 +14,9 @@ class InvestmentAccount(BankAccount):
     InvestmentAccount class: Represents clients Investment account.
     """
 
+    #CONSTANTS
+    TEN_YEARS_AGO = date.today() - timedelta(days = 10 * 365.25)
+
     def __init__(self, account_number: int, client_number: int, 
                 balance: float, date_created: date, management_fee: float):
         """
@@ -31,10 +34,6 @@ class InvestmentAccount(BankAccount):
         """
         #invoke superclass
         super().__init__(account_number, client_number, balance, date_created)
-
-        #constants (SHOULD CHECK IF REQUIRED TO BE OUTISDE OR INSIDE INIT).
-        #also check if needs to have self or not.
-        self.TEN_YEARS_AGO = date.today() - timedelta(days = 10 * 365.25)
 
         try:
             if  float(management_fee):
@@ -79,6 +78,6 @@ class InvestmentAccount(BankAccount):
         if self._date_created < self.TEN_YEARS_AGO:
             service_charge = BankAccount.BASE_SERVICE_CHARGE
         else:
-            service_charge = self.BASE_SERVICE_CHARGE + self.__management_fee
+            service_charge = BankAccount.BASE_SERVICE_CHARGE + self.__management_fee
         
         return service_charge

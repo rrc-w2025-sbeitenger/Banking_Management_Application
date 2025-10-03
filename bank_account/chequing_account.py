@@ -39,7 +39,7 @@ class ChequingAccount(BankAccount):
         try:
             if float(overdraft_limit):
                 self.__overdraft_limit = overdraft_limit
-        except:
+        except Exception:
             #if overdraft_limit cannot be parsed to a float set a
             #default of -100.
             overdraft_limit = -100
@@ -77,7 +77,6 @@ class ChequingAccount(BankAccount):
 
         """
         if self._BankAccount__balance >= self.__overdraft_limit:
-                                ##CHECK IF IT SHOULD BE SELF OR BANKACCOUNT
             service_charge = BankAccount.BASE_SERVICE_CHARGE
         
         if self._BankAccount__balance < self.__overdraft_limit:
