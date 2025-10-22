@@ -63,10 +63,10 @@ class SavingsAccount(BankAccount):
             using our service.
 
         """
-        if self._BankAccount__balance >= self.__minimum_balance:
+        if self.balance >= self.__minimum_balance:
             service_charge = BankAccount.BASE_SERVICE_CHARGE
         
-        if self._BankAccount__balance < self.__minimum_balance:
+        if self.balance < self.__minimum_balance:
             service_charge = (BankAccount.BASE_SERVICE_CHARGE 
                              * self.SERVICE_CHARGE_PREMIUM)
         

@@ -76,12 +76,12 @@ class ChequingAccount(BankAccount):
             service_charge(str): Calculated service charge for clients bank account.
 
         """
-        if self._BankAccount__balance >= self.__overdraft_limit:
+        if self.balance >= self.__overdraft_limit:
             service_charge = BankAccount.BASE_SERVICE_CHARGE
         
-        if self._BankAccount__balance < self.__overdraft_limit:
+        if self.balance < self.__overdraft_limit:
             service_charge = (BankAccount.BASE_SERVICE_CHARGE + 
-                             (self.__overdraft_limit - self._BankAccount__balance)
+                             (self.__overdraft_limit - self.balance)
                              * self.__overdraft_rate)
             
         return service_charge

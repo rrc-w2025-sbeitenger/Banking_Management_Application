@@ -77,7 +77,6 @@ class TestClient(unittest.TestCase):
         self.assertEqual(actual, expected)
     
     def test_dunder_str_method_valid_informal_format_returned(self):
-        #ASK IF THIS is correct
         #arrange
         #client = Client(12345, "Max", "Beit", "maxbeit@pixell-river.com")
 
