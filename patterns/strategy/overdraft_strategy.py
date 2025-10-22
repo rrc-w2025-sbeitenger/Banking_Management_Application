@@ -12,9 +12,9 @@ class OverdraftStrategy(ServiceChargeStrategy):
         """
         docstrings
         """
-
-        self.overdraft_limit = overdraft_limit
-        self.overdraft_rate = overdraft_rate
+        #SHOULD I USE THE SAME VALIATION (from chequing account?) FOR OVERDRAFT LIMIT???
+        self.__overdraft_limit = overdraft_limit
+        self.__overdraft_rate = overdraft_rate
 
     def calculate_service_charges(self, account: BankAccount) -> float:
         """
@@ -24,12 +24,12 @@ class OverdraftStrategy(ServiceChargeStrategy):
             service_charge(str): Calculated service charge for clients bank account.
 
         """
-        if self.balance >= self.__overdraft_limit:
-            service_charge = BankAccount.BASE_SERVICE_CHARGE
+        if account.balance >= self.__overdraft_limit:
+            service_charge = account.BASE_SERVICE_CHARGE
         
-        if self.balance < self.__overdraft_limit:
-            service_charge = (BankAccount.BASE_SERVICE_CHARGE + 
-                             (self.__overdraft_limit - self.balance)
+        if account.balance < self.__overdraft_limit:
+            service_charge = (account.BASE_SERVICE_CHARGE + 
+                             (self.__overdraft_limit - account.balance)
                              * self.__overdraft_rate)
             
         return service_charge
