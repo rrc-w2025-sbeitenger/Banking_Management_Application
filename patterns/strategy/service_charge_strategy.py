@@ -15,9 +15,10 @@ class ServiceChargeStrategy(ABC):
     #constant.
     BASE_SERVICE_CHARGE: float = 0.50
 
+    @abstractmethod
     def calculate_service_charges(account:BankAccount) -> float:
         """
-        Abstract calculte_service_charges.
+        Abstract calculte_service_charges. Implemented in subclasses.
         """
         pass
 
