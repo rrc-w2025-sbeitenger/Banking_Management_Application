@@ -11,7 +11,6 @@ class OverdraftStrategy(ServiceChargeStrategy):
     """
     Class to represent the overdraft for bank account.
     """
-    #//! EDIT DOC STRINGS
 
     def __init__(self, overdraft_limit:float, overdraft_rate: float):
         """

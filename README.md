@@ -17,7 +17,7 @@ inheritance hierarchy. Will include the use of polymorphism and abstaction.
 Assigment 3: This assigment will be using Strategy Patterns to simplify and 
 add scalability. And will add observer patterns to send notifications to clients.
 
-## Encapsulation (A1)
+## Encapsulation (A1):
 Encapsulation was achieved by making 'private' attributes. Name mangling the in
 the constructor by adding double underscore to the atrributes, and then creating
 getter properties so I can access the attributes without accidentally bypassing
@@ -26,10 +26,20 @@ so I can prevent direct access and raise valuerrors if the wrong argument was
 entered. Within all my functions in the BankAccount class I am using the
 name mangled attributes.
 
-## Polymorphism (A2)
+## Polymorphism (A2):
 Polymorphism was achieved by implementing abstract classes and methods.
 Polymorpism allows subclasses to access the abstract method in the abstract
 superclass. I can declare the abstract get_service_charges method in the
 superclass and then each other subclass, such as ChequingAccount, InvementAccount,
 and SavingsAccount can implement this method differently. I used this to
 create different service charges for each account type.
+
+## Strategy Pattern (A3):
+Strategy Patterns are implemented to allow the classes inwhich are inherting from
+BankAccount to use innerchangable code/algorthims. Such as overdraft fees, management fees, and 
+minimum balance. Instead of hard codeing them into each method, each strategy pattern has their
+respected code/algorthim, from which a class can then choose a strategy pattern. This reduces
+code reducncy, and supports "scalable when it comes to adding extra BankAccounts or new service
+charge rules" - Notes.
+Each class of the inhertied BankAccount class is calling a certain strategy pattern to support their
+needed calculations within get_service_charges().
