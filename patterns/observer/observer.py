@@ -15,6 +15,6 @@ class Observer(ABC):
 @abstractmethod
 def update(message:str):
     """
-    Abstract calculte_service_charges. Implemented in subclasses.
+    Abstract update method. Implemented in subclasses.
     """
     pass
