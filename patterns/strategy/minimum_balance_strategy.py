@@ -8,21 +8,22 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
     """
     docstrings
     """
+    #//! EDIT DOC STRINGS
+    
     #constant
-    SERVICE_CHARGE_PREMIUM = 2.0
+    SERVICE_CHARGE_PREMIUM: float = 2.00
 
     def __init__(self, minumum_balance: float):
         """
         """
-
-        self.__miniumn_balance = minumum_balance
+        self.__minimum_balance = minumum_balance
 
     def calculate_service_charges(self, account:BankAccount) -> float:
         """
         service charges for savings account.
 
         Returns:
-            service_charge (str): Savings bank account fee for
+            service_charge (float): Savings bank account fee for
             using our service.
 
         """

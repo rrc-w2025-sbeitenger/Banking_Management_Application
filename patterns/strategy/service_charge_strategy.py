@@ -8,9 +8,10 @@ class ServiceChargeStrategy(ABC):
     """
     docstring
     """
-
+    #//! EDIT DOC STRINGS
+    
     #constant.
-    base_service_charge = BankAccount.BASE_SERVICE_CHARGE
+    BASE_SERVICE_CHARGE: float = 0.50
 
     def calculate_service_charges(account:BankAccount) -> float:
         """

@@ -8,6 +8,7 @@ __version__ = "1.0.0"
 #imports
 from datetime import date
 from bank_account.bank_account import BankAccount
+from patterns.strategy.overdraft_strategy import OverdraftStrategy
 
 class ChequingAccount(BankAccount):
     """
@@ -51,8 +52,11 @@ class ChequingAccount(BankAccount):
         except Exception:
             overdraft_rate = 0.05
             self.__overdraft_rate = overdraft_rate
-    
 
+        #//! check if this correct
+        #private OverdraftStrategy instance.
+        self.__strategy = OverdraftStrategy(overdraft_limit, overdraft_rate)
+    
     def __str__(self) -> str:
         """
         informal string repsention of client accounts overdraft.
@@ -70,18 +74,14 @@ class ChequingAccount(BankAccount):
 
     def get_service_charges(self) -> float:
         """
-        Calculate the service charges for each client.
+        Calling calculate_service_charges on strategy object, which is an instance of
+        OverdraftStrategy, to calculate the service charges for client.
 
         Returns:
-            service_charge(str): Calculated service charge for clients bank account.
+            service_charge(float): Service charge for clients bank account.
 
         """
-        if self.balance >= self.__overdraft_limit:
-            service_charge = BankAccount.BASE_SERVICE_CHARGE
-        
-        if self.balance < self.__overdraft_limit:
-            service_charge = (BankAccount.BASE_SERVICE_CHARGE + 
-                             (self.__overdraft_limit - self.balance)
-                             * self.__overdraft_rate)
-            
+        #calling calculate_service_charges with self, since self is an instance of the class,
+        #and this class inherits from BankAccount.
+        service_charge = self.__strategy.calculate_service_charges(self)
         return service_charge

@@ -8,6 +8,7 @@ __version__ = "1.0.0"
 #imports
 from datetime import date, timedelta
 from bank_account.bank_account import BankAccount
+from patterns.strategy.management_fee_strategy import ManagementFeeStrategy
 
 class InvestmentAccount(BankAccount):
     """
@@ -35,12 +36,17 @@ class InvestmentAccount(BankAccount):
         #invoke superclass
         super().__init__(account_number, client_number, balance, date_created)
 
+        #private managment_fee attribute.
         try:
             if  float(management_fee):
                 self.__management_fee = management_fee
         except Exception:
             management_fee = 2.55
             self.__management_fee = management_fee
+
+        # //! access management_fee or self.__management_fee?
+        #private ManagementFeeStrategy instance.
+        self.__strategy = ManagementFeeStrategy(date_created, self.__management_fee)
         
     def __str__(self) -> str:
         """
@@ -69,16 +75,14 @@ class InvestmentAccount(BankAccount):
     
     def get_service_charges(self) -> float:
         """
-        service charges for the investments bank accounts.
+        Calling calculate_service_charges on strategy object, which is an instance of
+        ManagementFeeStrategy, to calculate the service charges for the investments bank accounts.
 
         Returns:
-            service_charge (float): Cost of service charge.
+            service_charge (float): Service charge for clients bank account.
 
         """
-        #if creation date is greater than 10 years.
-        if self._date_created < self.TEN_YEARS_AGO:
-            service_charge = BankAccount.BASE_SERVICE_CHARGE
-        else:
-            service_charge = BankAccount.BASE_SERVICE_CHARGE + self.__management_fee
-        
+        #calling calculate_service_charges with self, since self is an instance of the class,
+        #and this class inherits from BankAccount.
+        service_charge = self.__strategy.calculate_service_charges(self)
         return service_charge
