@@ -107,8 +107,13 @@ class Client(Observer):
     
     def update(self, message: str):
         """
-        #//! docstrings
+        Send email notification to alert the client of bank account balance bellow the minmum limit, or
+        transactions amounts over max thershold.
+
+        Args:
+            message(str): Alert notification for client.
+        
         """
-        subject = f"Unusual Activity: {datetime.now()}"
+        subject = f"ALERT: Unusual Activity: {datetime.now()}"
         fullMessage = f"Notification for {self.__client_name}: {self.__first_name} {self.__last_name}: {message}"
         simulate_send_email(self.__email_address, subject, fullMessage)

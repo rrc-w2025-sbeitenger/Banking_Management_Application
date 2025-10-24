@@ -9,13 +9,18 @@ __credits__ = ""
 #imports.
 from datetime import date
 from abc import ABC, abstractmethod
+from patterns.observer.subject import Subject
+from patterns.observer.observer import Observer
 
 #abstact BankAccount class.
-class BankAccount(ABC):
+class BankAccount(Subject, ABC):
     """
     BankAccount class: Represents clients bank account.
     """
-    
+    #constants
+    LARGE_TRANSACTION_THRESHOLD = 9999.99
+    LOW_BALANCE_LEVEL = 50.0
+
     def __init__(self, account_number: int, client_number: int,
                  balance: float, date_created: date):
         """
@@ -29,6 +34,9 @@ class BankAccount(ABC):
             date_created(date): The date of creation.
 
         """
+        #invoke the superclass init, so that _observer = [] is initialized.
+        super().__init__()
+
         if isinstance(account_number, int):
             self.__account_number = account_number
         else:
@@ -86,7 +94,9 @@ class BankAccount(ABC):
     
     def update_balance(self, amount: float) -> None:
         """
-        Updates the client's account balance if amount can be casted to float.
+        Updates client's account balance. Calls notify() method to alert the
+        bank account if the balance is lower than the low balance limit or
+        transaction amount is over the threshold.
 
         Args:
             amount (float): The transaction amount being entered.
@@ -97,6 +107,15 @@ class BankAccount(ABC):
                 self.__balance += amount
         except ValueError:
             pass
+        
+        #if balance is less than low balance level.
+        if self.__balance < self.LOW_BALANCE_LEVEL:
+            self.notify(f"Low balance warning {self.__balance:,.2f}:" +
+                        + f" on account {self.__account_number}.")
+        
+        #if transaction amount is greater than threshold.
+        if amount > self.LARGE_TRANSACTION_THRESHOLD:
+            self.notify(f"Large transaction {self.__amount:,.2f}: on account {self.__account_number}.")
          
     def deposit(self, amount:float) -> None:
         """
@@ -162,3 +181,35 @@ class BankAccount(ABC):
         Implemented in subclasses.
         """
         pass
+    
+    def attach(self, observer: Observer) -> None:
+        """
+        Append new observer to the subjects list of observers.
+
+        Args:
+            observer(Observer): chooses the correct update interface from Observer.
+
+        """
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer) -> None:
+        """
+        Remove existing observer from the subjects list of observers.
+
+        Args:
+            observer(Observer): chooses the correct update interface from Observer.
+        
+        """
+        self._observers.remove(observer)
+    
+    def notify(self, message:str) -> None:
+        """
+        Alerts all registered observers of a state change, by
+        iterating through the _observers list.
+
+        Args:
+            message(str): Alert notification message.
+
+        """
+        for i in self._observers:
+            i.update(message)
