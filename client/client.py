@@ -4,11 +4,14 @@ Description: A class to manage Client objects
 
 __author__ = "Sven Beitegner"
 __version__ = "1.0.0"
-__credits__ = ""
 
+#imports
+from patterns.observer.observer import Observer
+from utility.file_utils import simulate_send_email
 from email_validator import validate_email, EmailNotValidError
+from datetime import datetime
 
-class Client:
+class Client(Observer):
     """
     Client class: Represents the clients information.
     """
@@ -101,3 +104,11 @@ class Client:
         
         return (f"{self.__last_name}, {self.__first_name}"
                + f" [{self.__client_number}] - {self.__email_address}\n")
+    
+    def update(self, message: str):
+        """
+        #//! docstrings
+        """
+        subject = f"Unusual Activity: {datetime.now()}"
+        fullMessage = f"Notification for {self.__client_name}: {self.__first_name} {self.__last_name}: {message}"
+        simulate_send_email(self.__email_address, subject, fullMessage)
