@@ -11,7 +11,6 @@ class ServiceChargeStrategy(ABC):
     """
     Class to represent the base abstract superclass for strategy's to inherit from.
     """
-
     #constant.
     BASE_SERVICE_CHARGE: float = 0.50
 

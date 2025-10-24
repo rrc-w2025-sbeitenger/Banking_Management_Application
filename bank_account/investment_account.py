@@ -44,7 +44,6 @@ class InvestmentAccount(BankAccount):
             management_fee = 2.55
             self.__management_fee = management_fee
 
-        # //! access management_fee or self.__management_fee?
         #private ManagementFeeStrategy instance.
         self.__strategy = ManagementFeeStrategy(date_created, self.__management_fee)
         

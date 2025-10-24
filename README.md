@@ -43,3 +43,11 @@ code reducncy, and supports "scalable when it comes to adding extra BankAccounts
 charge rules" - Notes.
 Each class of the inhertied BankAccount class is calling a certain strategy pattern to support their
 needed calculations within get_service_charges().
+
+## Observer Pattern (A3):
+Observer Pattern is implemented into the application so the client can be the observer of the BankAccount.
+The client inherts from the Observer class, and the BankAccount inhertis from the Subject class.
+The Subject class is dependent on the observer class since if any changes happen that raise an alert, like
+withdrawing over the 9999.99 threshold, or being bellow the minimum balace limit the observer(client) wants to know.
+Since BankAccount inherting from Subjects, that means all the of BankAccounts subclass are also now Subjects also.
+SavingsAccount, ChequingsAccount, InvestmentAccounts are subjects which will notify the observer. 

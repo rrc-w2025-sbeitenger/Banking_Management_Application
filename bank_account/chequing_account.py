@@ -53,7 +53,6 @@ class ChequingAccount(BankAccount):
             overdraft_rate = 0.05
             self.__overdraft_rate = overdraft_rate
 
-        #//! check if this correct
         #private OverdraftStrategy instance.
         self.__strategy = OverdraftStrategy(overdraft_limit, overdraft_rate)
     

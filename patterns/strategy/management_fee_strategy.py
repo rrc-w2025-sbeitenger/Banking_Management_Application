@@ -32,6 +32,9 @@ class ManagementFeeStrategy(ServiceChargeStrategy):
         """
         service charges for the investments bank accounts.
 
+        Args:
+            account(BankAcount): the client bank account of BankAccount class.
+
         Returns:
             service_charge (float): Service charge for clients bank account.
 

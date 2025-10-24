@@ -27,6 +27,9 @@ class OverdraftStrategy(ServiceChargeStrategy):
         """
         Calculate the service charges for each client.
 
+        Args:
+            account(BankAcount): the client bank account of BankAccount class.
+            
         Returns:
             service_charge(float): Service charge for clients bank account.
 
