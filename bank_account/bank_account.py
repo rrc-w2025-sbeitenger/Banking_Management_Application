@@ -111,11 +111,11 @@ class BankAccount(Subject, ABC):
         #if balance is less than low balance level.
         if self.__balance < self.LOW_BALANCE_LEVEL:
             self.notify(f"Low balance warning {self.__balance:,.2f}:" +
-                        + f" on account {self.__account_number}.")
+                         f" on account {self.__account_number}.")
         
         #if transaction amount is greater than threshold.
         if amount > self.LARGE_TRANSACTION_THRESHOLD:
-            self.notify(f"Large transaction {self.__amount:,.2f}: on account {self.__account_number}.")
+            self.notify(f"Large transaction {amount:,.2f}: on account {self.__account_number}.")
          
     def deposit(self, amount:float) -> None:
         """

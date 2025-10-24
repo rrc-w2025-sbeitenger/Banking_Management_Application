@@ -3,7 +3,7 @@
 
 #imports
 from abc import ABC, abstractmethod
-from observer import Observer
+from patterns.observer.observer import Observer
 
 __author__ = "Sven Beitenger"
 __version__ = "1.0.0"

@@ -115,5 +115,5 @@ class Client(Observer):
         
         """
         subject = f"ALERT: Unusual Activity: {datetime.now()}"
-        fullMessage = f"Notification for {self.__client_name}: {self.__first_name} {self.__last_name}: {message}"
+        fullMessage = f"Notification for {self.__client_number}: {self.__first_name} {self.__last_name}: {message}"
         simulate_send_email(self.__email_address, subject, fullMessage)
