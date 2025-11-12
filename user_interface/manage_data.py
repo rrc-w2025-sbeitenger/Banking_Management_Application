@@ -97,7 +97,7 @@ def load_data()->tuple[dict,dict]:
                 balance = float(row['balance'])
 
                 date_str = str(row['date_created'])
-                date_created = datetime.strptime(date_str, "%Y-%m-%d")
+                date_created = datetime.strptime(date_str, "%Y-%m-%d").date()
             
                 account_type = str(row['account_type'])
 
@@ -127,14 +127,17 @@ def load_data()->tuple[dict,dict]:
 
                 #evluate the account_type for each record.
                 if account_type == "ChequingAccount":
+                    #//! if check (move overdraft_rate and limit to here).
                     bank_account = ChequingAccount(account_number, client_number,
                                     balance, date_created,
                                     overdraft_limit, overdraft_rate)
                 elif account_type == "SavingsAccount":
+                    #//! if check (move minimum_balance to here).
                     bank_account = SavingsAccount(account_number, client_number,
                                     balance, date_created, 
                                     minimum_balance)
                 elif account_type == "InvestmentAccount":
+                    #//! if check (move managment_fee to here).
                     bank_account = InvestmentAccount(account_number, client_number,
                                         balance, date_created,
                                         management_fee)

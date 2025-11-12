@@ -16,7 +16,7 @@ class InvestmentAccount(BankAccount):
     """
 
     #CONSTANTS
-    TEN_YEARS_AGO = datetime.now() - timedelta(days = 10 * 365.25)
+    TEN_YEARS_AGO = date.today() - timedelta(days = 10 * 365.25)
 
     def __init__(self, account_number: int, client_number: int, 
                 balance: float, date_created: date, management_fee: float):
