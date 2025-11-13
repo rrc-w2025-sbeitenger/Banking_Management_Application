@@ -1,6 +1,6 @@
 __author__ = "ACE Faculty"
 __version__ = "1.0.0"
-__credits__ = ""
+__credits__ = "Sven Beitenger"
 
 from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
 from PySide6.QtCore import Qt, Slot
