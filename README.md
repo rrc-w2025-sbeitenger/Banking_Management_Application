@@ -14,8 +14,11 @@ build a client and bank account systems.
 Assignment 2: This assignment will be using superclasses and subclasses using
 inheritance hierarchy. Will include the use of polymorphism and abstaction.
 
-Assigment 3: This assigment will be using Strategy Patterns to simplify and 
+Assigment 3: This assignment will be using Strategy Patterns to simplify and 
 add scalability. And will add observer patterns to send notifications to clients.
+
+Assignment 4: This assignment will include a graphical user interface where users
+can select their bank account data and deposit or withdraw transactions.
 
 ## Encapsulation (A1):
 Encapsulation was achieved by making 'private' attributes. Name mangling the in
