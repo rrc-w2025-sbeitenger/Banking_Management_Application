@@ -95,7 +95,7 @@ class ClientLookupWindow(LookupWindow):
     @Slot()
     def __on_text_changed(self):
         """
-        Set the table row count to zero.
+        Removes all rows from table. Sets the table row count to zero.
         """
         self.account_table.setRowCount(0)
 
@@ -103,11 +103,11 @@ class ClientLookupWindow(LookupWindow):
     @Slot(int, int)
     def __on_select_account(self, row: int, column: int):
         """
-        receive the values of the cell clicked on the table.
+        Receive the values of the cell clicked on the table.
 
         Args:
             row (int): Row of the clicked table cell.
-            column(int): Column of the clicked table cell.
+            column (int): Column of the clicked table cell.
         """
         column = 0
         #receive account number.
@@ -148,7 +148,6 @@ class ClientLookupWindow(LookupWindow):
                 #change text of the table balance cell, to the new balance. 
                 self.account_table.item(row, 1).setText(f"${account.balance:,.2f}")
                 
-                #//!self.__accounts[account.balance] = account.balance
                 #update the account in the accounts dictionary.
                 self.__accounts[account.account_number] = account
 
