@@ -12,6 +12,9 @@ class AccountDetailsWindow(DetailsWindow):
     """
     A class used to display account details and perform bank account transactions.
     """
+
+    balance_updated = Signal(BankAccount)
+
     def __init__(self, account: BankAccount) -> None:
         """
         Initializes a new instance of the ExtendedAccountDetails window.
@@ -41,22 +44,24 @@ class AccountDetailsWindow(DetailsWindow):
         """
         docstrings
         """
-        #parse transactoin amount.
+        #parse transaction amount.
         try:
             transaction_amount = float(self.transaction_amount_edit.text())
         except ValueError:
             QMessageBox.information(self, "Invalid Data",
-                                    f"Amount must be numeric.",
+                                    "Amount must be numeric.",
                                     QMessageBox.Ok, QMessageBox.Ok)
         
         try:
             if self.sender() == self.deposit_button:
                 transaction_string = "Deposit"
                 self.__account.deposit(transaction_amount)
+                self.balance_updated.emit(self.__account)
             
             if self.sender() == self.withdraw_button:
                 transaction_string = "Withdraw"
                 self.__account.withdraw(transaction_amount)
+                self.balance_updated.emit(self.__account)
             
             #set text to balance amount.
             self.balance_label.setText(f"${self.__account.balance:,.2f}")

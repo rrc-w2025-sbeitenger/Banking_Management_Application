@@ -14,6 +14,9 @@ from bank_account.bank_account import BankAccount
 class ClientLookupWindow(LookupWindow):
     
     def __init__(self):
+        """
+        docstrings
+        """
         super().__init__()
 
         #tuple of dictionaries.
@@ -102,9 +105,16 @@ class ClientLookupWindow(LookupWindow):
         #obtain account number.
         account_number = int(self.account_table.item(row, column).text())
         
+        
         if account_number in self.__accounts:
+            #obtain the bank account.
             bank_account = self.__accounts[account_number]
-            AccountDetailsWindow(bank_account).exec_()
+            #intance of AccountDetailsWindows.
+            accountWindow = AccountDetailsWindow(bank_account)
+            #connect the signal object of AccountDetailWindow to update_data.
+            accountWindow.balance_updated.connect(self.__update_data)
+            #open window as dialog box.
+            accountWindow.exec_()
         elif account_number is None:
             QMessageBox.information(self, "account_number",
                                     f"Please select a valid record.",
@@ -114,4 +124,21 @@ class ClientLookupWindow(LookupWindow):
                                     f"Bank Account selected does not exist.",
                                     QMessageBox.Ok, QMessageBox.Ok)
 
+    @Slot()
+    def __update_data(self, account: BankAccount):
+        """
+        docstrings.
+        """
+        #itertae through the table rows.
+        for row in range(self.account_table.rowCount()):
+            #if account_number is equal to the account number on the table cell.
+            if account.account_number == int(self.account_table.item(row, 0).text()):
+                #change text of the table balance cell, to the new balance. 
+                self.account_table.item(row, 1).setText(f"{account.balance:,.2f}")
+                
+                #self.__accounts[account.balance] = account.balance
+                #update the account in the accounts dictionary.
+                self.__accounts[account.account_number] = account
+                update_data(account)
 
+            
