@@ -60,7 +60,7 @@ Event-Driven programming was added into this application by creating event handl
 It responds to user driven events, such as mouse clicks, or button presses, by signaling the correct slot method.
 For client_look_up.py and manage_data.py modules the init() method acts as a 'connection hub' for most of the
 event handlers and event listeners (slot methods, and signals). Each @Slot() method is a event handler that reacts
-to a specific event/signal when it occurs, the slot will exacute it's inner code. In this application event listner
-signals are emitted by pyside6 widgets, such as QPushButtons, QLineEdits, QTableWidget and even a custom singal that connects
+to a specific event/signal when it occurs, the slot will execute it's inner code. In this application event listner
+signals are emitted by pyside6 widgets, such as QPushButtons, QLineEdits, QTableWidget and even a custom signal that connects
 the object of AccountDetailWindow to update_data. For example: The buttons widgets clicked signals the the slot method,
 button.clicked.connect.(@Slot()).
