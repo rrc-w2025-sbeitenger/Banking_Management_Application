@@ -6,7 +6,7 @@ __author__ = "Sven Beitegner"
 __version__ = "1.0.0"
 
 #imports
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from bank_account.bank_account import BankAccount
 from patterns.strategy.management_fee_strategy import ManagementFeeStrategy
 

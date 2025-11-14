@@ -1,6 +1,6 @@
 __author__ = "ACE Faculty"
 __version__ = "1.0.0"
-__credits__ = ""
+__credits__ = "Sven Beitenger"
 
 import os
 import sys
@@ -8,8 +8,14 @@ import sys
 # CODE CAN RUN FROM THIS DIRECTORY.
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import csv
-from datetime import datetime
+from datetime import datetime, date
 import logging
+
+from client.client import Client
+from bank_account.bank_account import BankAccount
+from bank_account.chequing_account import ChequingAccount
+from bank_account.savings_account import SavingsAccount
+from bank_account.investment_account import InvestmentAccount
 
 # *******************************************************************************
 # GIVEN LOGGING AND FILE ACCESS CODE
@@ -62,14 +68,82 @@ def load_data()->tuple[dict,dict]:
     with open(clients_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         
+        try:
+            #for each row in reader, pull out the corresponding data.
+            for row in reader:
+                client_number = int(row['client_number'])
+                first_name = str(row['first_name'])
+                last_name = str(row['last_name'])
+                email_address = str(row['email_address'])
+                #create client object that will be added to client_listing dictionary
+                #with key and value.
+                client = Client(client_number, first_name, last_name, email_address)
+                client_listing[client_number] = client
+        except Exception as e:
+            logging.error(f"Unable to create client: {e}") 
+
 
     # READ ACCOUNT DATA
     with open(accounts_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  
 
-    # RETURN STATEMENT
-    
+        #iterate through the CSV file.
+        for row in reader:
+            try:
+                account_number = int(row['account_number'])
+            
+                client_number = int(row['client_number'])
+            
+                balance = float(row['balance'])
 
+                date_str = str(row['date_created'])
+                date_created = datetime.strptime(date_str, "%Y-%m-%d").date()
+            
+                account_type = str(row['account_type'])
+                    
+                #Evaluate the account_type for each record.
+                if account_type == "ChequingAccount":
+                    #Since this is a ChequingAccount we know it will have
+                    #each overdraft, the parse each overdraft to float.
+                    overdraft_limit = float(row['overdraft_limit'])
+                    overdraft_rate = float(row['overdraft_rate'])
+
+                    bank_account = ChequingAccount(account_number, client_number,
+                                    balance, date_created,
+                                    overdraft_limit, overdraft_rate)
+                elif account_type == "SavingsAccount":
+                    #Since this a SavingsAccount we know it will have
+                    #a minimum balance, then parse to float.
+                    minimum_balance = float(row['minimum_balance'])
+                    
+                    bank_account = SavingsAccount(account_number, client_number,
+                                    balance, date_created, 
+                                    minimum_balance)
+                elif account_type == "InvestmentAccount":
+                    #Since this a InvestmentAccount we know it will have
+                    #a managment fee, then parse to float.
+                    management_fee = float(row['management_fee'])
+
+                    bank_account = InvestmentAccount(account_number, client_number,
+                                        balance, date_created,
+                                        management_fee)
+                else:
+                    raise ValueError("Not a valid account type.")
+                
+                #if BankAccount exits in client_listing add it to the accounts dictionary
+                if client_number in client_listing:
+                    accounts[account_number] = bank_account
+                else:
+                    logging.error(f"Bank Account: {account_number}" +
+                                    f" contains invalid Client Number: {client_number}")
+            
+            #if any raise expections, error log it.
+            except Exception as e:
+                logging.error(f"Unable to create bank account: {e}")
+
+    # RETURN STATEMENT -> returning client_listing and accounts dicts in a tuple.
+    return (client_listing, accounts)
+    
 
 def update_data(updated_account: BankAccount) -> None:
     """
