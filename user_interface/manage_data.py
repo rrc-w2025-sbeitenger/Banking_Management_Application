@@ -100,44 +100,30 @@ def load_data()->tuple[dict,dict]:
                 date_created = datetime.strptime(date_str, "%Y-%m-%d").date()
             
                 account_type = str(row['account_type'])
-
-                overdraft_limit_str = str(row['overdraft_limit'])
-                if overdraft_limit_str == 'Null':
-                    overdraft_limit = 0
-                else:
-                    overdraft_limit = float(overdraft_limit_str)
-
-                overdraft_rate_str = str(row['overdraft_rate'])
-                if overdraft_rate_str == 'Null':
-                    overdraft_rate = 0
-                else:
-                    overdraft_rate = float(overdraft_rate_str)
-
-                minimum_balance_str = str(row['minimum_balance'])
-                if minimum_balance_str == 'Null':
-                    minimum_balance = 0
-                else:
-                    minimum_balance = float(minimum_balance_str)
-
-                management_fee_str = str(row['management_fee'])
-                if management_fee_str == 'Null':
-                    management_fee = 0
-                else:
-                    management_fee = float(management_fee_str)
-
-                #evluate the account_type for each record.
+                    
+                #Evaluate the account_type for each record.
                 if account_type == "ChequingAccount":
-                    #//! if check (move overdraft_rate and limit to here).
+                    #Since this is a ChequingAccount we know it will have
+                    #each overdraft, the parse each overdraft to float.
+                    overdraft_limit = float(row['overdraft_limit'])
+                    overdraft_rate = float(row['overdraft_rate'])
+
                     bank_account = ChequingAccount(account_number, client_number,
                                     balance, date_created,
                                     overdraft_limit, overdraft_rate)
                 elif account_type == "SavingsAccount":
-                    #//! if check (move minimum_balance to here).
+                    #Since this a SavingsAccount we know it will have
+                    #a minimum balance, then parse to float.
+                    minimum_balance = float(row['minimum_balance'])
+                    
                     bank_account = SavingsAccount(account_number, client_number,
                                     balance, date_created, 
                                     minimum_balance)
                 elif account_type == "InvestmentAccount":
-                    #//! if check (move managment_fee to here).
+                    #Since this a InvestmentAccount we know it will have
+                    #a managment fee, then parse to float.
+                    management_fee = float(row['management_fee'])
+
                     bank_account = InvestmentAccount(account_number, client_number,
                                         balance, date_created,
                                         management_fee)
@@ -150,6 +136,8 @@ def load_data()->tuple[dict,dict]:
                 else:
                     logging.error(f"Bank Account: {account_number}" +
                                     f" contains invalid Client Number: {client_number}")
+            
+            #if any raise expections, error log it.
             except Exception as e:
                 logging.error(f"Unable to create bank account: {e}")
 
