@@ -70,7 +70,6 @@ def load_data()->tuple[dict,dict]:
         
         try:
             #for each row in reader, pull out the corresponding data.
-            #//! Indexing such as int(reader[0]) only works in a csv.reader.
             for row in reader:
                 client_number = int(row['client_number'])
                 first_name = str(row['first_name'])
@@ -88,6 +87,7 @@ def load_data()->tuple[dict,dict]:
     with open(accounts_csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)  
 
+        #iterate through the CSV file.
         for row in reader:
             try:
                 account_number = int(row['account_number'])

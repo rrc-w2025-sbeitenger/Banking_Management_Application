@@ -12,10 +12,13 @@ from user_interface.manage_data import update_data
 from bank_account.bank_account import BankAccount
 
 class ClientLookupWindow(LookupWindow):
-    
+    """
+    Window which allows the user to search up clients.
+    """
     def __init__(self):
         """
-        docstrings
+        Initialize class attrbutes to argument values.
+        Invoke the super __init__, and connect button signals to slots methods.
         """
         super().__init__()
 
@@ -26,6 +29,7 @@ class ClientLookupWindow(LookupWindow):
         #accounts dictionary.
         self.__accounts = data_tuple [1]
 
+        #connect signals to slots.
         self.lookup_button.clicked.connect(self.__on_lookup_client)
         self.client_number_edit.textChanged.connect(self.__on_text_changed)
         self.account_table.cellClicked.connect(self.__on_select_account)
@@ -34,9 +38,9 @@ class ClientLookupWindow(LookupWindow):
     @Slot()
     def __on_lookup_client(self):
         """
-        docstrings
+        When the user looks up the client number fill the table with client data.
         """
-        #parse client_number to integer, if it fails display QMessageBox.
+        #parse client_number to integer, if it fails display error window.
         try:
             client_number = int(self.client_number_edit.text())
         except ValueError:
@@ -58,7 +62,7 @@ class ClientLookupWindow(LookupWindow):
             self.client_info_label.setText(f"Client Name: {client_object.first_name} {client_object.last_name}")
         
         #iterate though the accounts dict for matching client_number.
-        #where i represents each BankAccount.
+        #where i represents each BankAccount (could change 'i' to 'account').
         for i in self.__accounts.values():
             if client_number == i.client_number:
                 #add empty row under any other rows.
@@ -91,7 +95,7 @@ class ClientLookupWindow(LookupWindow):
     @Slot()
     def __on_text_changed(self):
         """
-        docstrings
+        Set the table row count to zero.
         """
         self.account_table.setRowCount(0)
 
@@ -99,10 +103,14 @@ class ClientLookupWindow(LookupWindow):
     @Slot(int, int)
     def __on_select_account(self, row: int, column: int):
         """
-        docstrings
+        receive the values of the cell clicked on the table.
+
+        Args:
+            row (int): Row of the clicked table cell.
+            column(int): Column of the clicked table cell.
         """
         column = 0
-        #obtain account number.
+        #receive account number.
         account_number = int(self.account_table.item(row, column).text())
         
         
@@ -117,28 +125,34 @@ class ClientLookupWindow(LookupWindow):
             accountWindow.exec_()
         elif account_number is None:
             QMessageBox.information(self, "account_number",
-                                    f"Please select a valid record.",
+                                    "Please select a valid record.",
                                     QMessageBox.Ok, QMessageBox.Ok)
         else:
             QMessageBox.information(self, "No Bank Account",
-                                    f"Bank Account selected does not exist.",
+                                    "Bank Account selected does not exist.",
                                     QMessageBox.Ok, QMessageBox.Ok)
 
     @Slot()
     def __update_data(self, account: BankAccount):
         """
-        docstrings.
+        Updates account based on the transaction amount made in AccountDetailsWindow.
+        AccountDetailsWindow sends a signal to this slot method.
+
+        Args:
+            account (BankAccount): The bank account being affected. 
         """
-        #itertae through the table rows.
+        #iterate through the table rows.
         for row in range(self.account_table.rowCount()):
             #if account_number is equal to the account number on the table cell.
             if account.account_number == int(self.account_table.item(row, 0).text()):
                 #change text of the table balance cell, to the new balance. 
-                self.account_table.item(row, 1).setText(f"{account.balance:,.2f}")
+                self.account_table.item(row, 1).setText(f"${account.balance:,.2f}")
                 
-                #self.__accounts[account.balance] = account.balance
+                #//!self.__accounts[account.balance] = account.balance
                 #update the account in the accounts dictionary.
                 self.__accounts[account.account_number] = account
+
+                #update CSV file.
                 update_data(account)
 
             

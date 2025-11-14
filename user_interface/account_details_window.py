@@ -12,14 +12,16 @@ class AccountDetailsWindow(DetailsWindow):
     """
     A class used to display account details and perform bank account transactions.
     """
-
+    #signal object representing the updated BankAccount.
     balance_updated = Signal(BankAccount)
 
     def __init__(self, account: BankAccount) -> None:
         """
         Initializes a new instance of the ExtendedAccountDetails window.
+
         Args:
             account: The bank account to be displayed.
+
         Returns:
             None
         """
@@ -42,9 +44,10 @@ class AccountDetailsWindow(DetailsWindow):
     @Slot()
     def __on_apply_transaction(self):
         """
-        docstrings
+        Will perform a transaction using the transaction amount entered.
+        This is a slot method, for the signals of the withdraw and depoit buttons.
         """
-        #parse transaction amount.
+        #parse transaction amount to float.
         try:
             transaction_amount = float(self.transaction_amount_edit.text())
         except ValueError:
@@ -53,11 +56,13 @@ class AccountDetailsWindow(DetailsWindow):
                                     QMessageBox.Ok, QMessageBox.Ok)
         
         try:
+            #check if button widget was clicked.
             if self.sender() == self.deposit_button:
                 transaction_string = "Deposit"
                 self.__account.deposit(transaction_amount)
                 self.balance_updated.emit(self.__account)
             
+            #check if button widget was clicked.
             if self.sender() == self.withdraw_button:
                 transaction_string = "Withdraw"
                 self.__account.withdraw(transaction_amount)
@@ -76,6 +81,6 @@ class AccountDetailsWindow(DetailsWindow):
     @Slot()
     def __on_exit(self):
         """
-        docstrings
+        close window when users clicks on exit button.
         """
         self.close()
