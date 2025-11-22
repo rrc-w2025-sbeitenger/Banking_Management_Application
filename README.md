@@ -64,3 +64,5 @@ to a specific event/signal when it occurs, the slot will execute it's inner code
 signals are emitted by pyside6 widgets, such as QPushButtons, QLineEdits, QTableWidget and even a custom signal that connects
 the object of AccountDetailWindow to update_data. For example: The buttons widgets clicked signals the the slot method,
 button.clicked.connect.(@Slot()).
+
+## Placeholder (A5):
