@@ -14,8 +14,11 @@ build a client and bank account systems.
 Assignment 2: This assignment will be using superclasses and subclasses using
 inheritance hierarchy. Will include the use of polymorphism and abstaction.
 
-Assigment 3: This assigment will be using Strategy Patterns to simplify and 
+Assigment 3: This assignment will be using Strategy Patterns to simplify and 
 add scalability. And will add observer patterns to send notifications to clients.
+
+Assignment 4: This assignment will include a graphical user interface where users
+can select their bank account data and deposit or withdraw transactions.
 
 ## Encapsulation (A1):
 Encapsulation was achieved by making 'private' attributes. Name mangling the in
@@ -50,4 +53,14 @@ The client inherits from the Observer class, and the BankAccount inherits from t
 The Subject class is dependent on the observer class since if any changes happen that raise an alert, like
 withdrawing over the 9999.99 threshold, or being bellow the minimum balance limit the observer(client) wants to know.
 Since BankAccount is inherting from Subjects, that means all the of BankAccounts subclass are also Subjects.
-SavingsAccount, ChequingsAccount, InvestmentAccounts are subjects which will notify the observer. 
+SavingsAccount, ChequingsAccount, InvestmentAccounts are subjects which will notify the observer.
+
+## Event-Driven programming paradigm (A4):
+Event-Driven programming was added into this application by creating event handlers methods and event listeners from pyside6.
+It responds to user driven events, such as mouse clicks, or button presses, by signaling the correct slot method.
+For client_look_up.py and manage_data.py modules the init() method acts as a 'connection hub' for most of the
+event handlers and event listeners (slot methods, and signals). Each @Slot() method is a event handler that reacts
+to a specific event/signal when it occurs, the slot will execute it's inner code. In this application event listner
+signals are emitted by pyside6 widgets, such as QPushButtons, QLineEdits, QTableWidget and even a custom signal that connects
+the object of AccountDetailWindow to update_data. For example: The buttons widgets clicked signals the the slot method,
+button.clicked.connect.(@Slot()).
