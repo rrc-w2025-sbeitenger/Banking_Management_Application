@@ -33,6 +33,7 @@ class ClientLookupWindow(LookupWindow):
         self.lookup_button.clicked.connect(self.__on_lookup_client)
         self.client_number_edit.textChanged.connect(self.__on_text_changed)
         self.account_table.cellClicked.connect(self.__on_select_account)
+        self.filter_button.clicked.connect(self.__on_filter_clicked)
     
 
     @Slot()
@@ -154,4 +155,34 @@ class ClientLookupWindow(LookupWindow):
                 #update CSV file.
                 update_data(account)
 
-            
+    def __on_filter_clicked(self):
+        """
+        filters data on the table using user entered text form the filter_combo_box and filter_edit.
+        ! update later !
+        """
+        if self.filter_button.text() == "Apply Filter":
+            #obtain the filter_combo_box current index
+            filter_edit_text = self.filter_edit.text()
+            filter_combo_box_index = self.filter_combo_box.currentIndex()
+            filtered_list= []
+
+            # i = row
+            for row in range(self.account_table.rowCount()):
+                #if :filter_edit_text(i) is True and filter_combo_box_index(i) is True:
+                table_cell = self.account_table.item(row, filter_combo_box_index)
+                table_cell_text = table_cell.text()
+                if filter_edit_text not in table_cell_text:
+                    self.account_table.setRowHidden(row, True)
+                else:
+                    self.account_table.setRowHidden(row, False)
+                
+                self.__toggle_filter(True)
+        else:
+            self.__toggle_filter(False)
+
+
+
+    def __toggle_filter(self, filter_on: bool):
+        """
+        docstings.
+        """
