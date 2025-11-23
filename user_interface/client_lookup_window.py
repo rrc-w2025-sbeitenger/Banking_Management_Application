@@ -161,8 +161,8 @@ class ClientLookupWindow(LookupWindow):
 
     def __on_filter_clicked(self):
         """
-        filters data on the table using user entered text form the filter_combo_box and filter_edit.
-        ! update later !
+        filters data in the table using user entered text form the and filter_edit widget.
+        If the filter_edit text is not within a table cell then it will be filtered out.
         """
         #filter out rows form the filter combobox selection.
         if self.filter_button.text() == "Apply Filter":
@@ -194,18 +194,22 @@ class ClientLookupWindow(LookupWindow):
 
     def __toggle_filter(self, filter_on: bool):
         """
-        docstings.
+        Display filtering messages to the user if there data is being
+        filter or not though Pyside6 widgets such as, filter_label and filter_button.
+
+        Args:
+            filter_on (boolean): If the current data is being filtered or not.
         """
         #Enable the filter button.
         self.filter_button.setEnabled(True)
 
-        #table data is being filtered!
+        #display that table data is being filtered!
         if filter_on:
             self.filter_button.setText("Reset.")
             self.filter_combo_box.setDisabled(True)
             self.filter_edit.setDisabled(True)
             self.filter_label.setText("Data is Currently Filtered.")
-        #table data is not being filtered!
+        #display that table data is not being filtered!
         elif filter_on == False:
             self.filter_button.setText("Apply Filter")
             self.filter_combo_box.setDisabled(False)
@@ -215,6 +219,7 @@ class ClientLookupWindow(LookupWindow):
 
             #iterate through the rows of account_table.
             for row in range(self.account_table.rowCount()):
+                #show all the rows, since it's not being filtered.
                 self.account_table.setRowHidden(row, False)
 
             self.filter_label.setText("Data is Not Currently Filtered.") 
