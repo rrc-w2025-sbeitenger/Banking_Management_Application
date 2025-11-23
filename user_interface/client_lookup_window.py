@@ -87,6 +87,10 @@ class ClientLookupWindow(LookupWindow):
                 self.account_table.setItem(current_row, 1, balance_widget)
                 self.account_table.setItem(current_row, 2, date_created_widget)
                 self.account_table.setItem(current_row, 3, account_type_widget)
+
+                #When client record is displayed, invoke toggle_filter to indicate
+                #that it is not being filtered.
+                self.__toggle_filter(False)
             else:
                 continue
         
@@ -160,29 +164,57 @@ class ClientLookupWindow(LookupWindow):
         filters data on the table using user entered text form the filter_combo_box and filter_edit.
         ! update later !
         """
+        #filter out rows form the filter combobox selection.
         if self.filter_button.text() == "Apply Filter":
-            #obtain the filter_combo_box current index
-            filter_edit_text = self.filter_edit.text()
+            #filter combobox index values are the same as the table columns index. When a selection is
+            #choosen in the filter combobox it's filtering by that column in the table.
             filter_combo_box_index = self.filter_combo_box.currentIndex()
-            filtered_list= []
+            filter_edit_text = self.filter_edit.text()
 
-            # i = row
+            #iterate through account table.
             for row in range(self.account_table.rowCount()):
-                #if :filter_edit_text(i) is True and filter_combo_box_index(i) is True:
+                #check each table cells by row iteration, and using the filter combobox
+                #index as the column.
                 table_cell = self.account_table.item(row, filter_combo_box_index)
+                #grab the text of the current table cell to compare to.
                 table_cell_text = table_cell.text()
+                
+                #if the text in the filter_edit_text widget is NOT within the table cell,
+                #then hide it, else display it.
                 if filter_edit_text not in table_cell_text:
                     self.account_table.setRowHidden(row, True)
                 else:
                     self.account_table.setRowHidden(row, False)
                 
+                #data is being filtered!
                 self.__toggle_filter(True)
         else:
+            #data is not being filtered!
             self.__toggle_filter(False)
-
-
 
     def __toggle_filter(self, filter_on: bool):
         """
         docstings.
         """
+        #Enable the filter button.
+        self.filter_button.setEnabled(True)
+
+        #table data is being filtered!
+        if filter_on:
+            self.filter_button.setText("Reset.")
+            self.filter_combo_box.setDisabled(True)
+            self.filter_edit.setDisabled(True)
+            self.filter_label.setText("Data is Currently Filtered.")
+        #table data is not being filtered!
+        elif filter_on == False:
+            self.filter_button.setText("Apply Filter")
+            self.filter_combo_box.setDisabled(False)
+            self.filter_edit.setDisabled(False)
+            self.filter_edit.setText("")
+            self.filter_combo_box.setCurrentIndex(0)
+
+            #iterate through the rows of account_table.
+            for row in range(self.account_table.rowCount()):
+                self.account_table.setRowHidden(row, False)
+
+            self.filter_label.setText("Data is Not Currently Filtered.") 
