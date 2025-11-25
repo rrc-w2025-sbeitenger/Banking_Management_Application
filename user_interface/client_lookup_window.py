@@ -161,13 +161,14 @@ class ClientLookupWindow(LookupWindow):
 
     def __on_filter_clicked(self):
         """
-        filters data in the table using user entered text form the and filter_edit widget.
+        Filters data in the table by user entered text from the filter_edit widget.
         If the filter_edit text is not within a table cell then it will be filtered out.
         """
         #filter out rows form the filter combobox selection.
         if self.filter_button.text() == "Apply Filter":
-            #filter combobox index values are the same as the table columns index. When a selection is
-            #choosen in the filter combobox it's filtering by that column in the table.
+            #filter combobox index values are the same as the table columns index.
+            #When a selection is choosen in the filter combobox it's filtering by
+            #that column in the table.
             filter_combo_box_index = self.filter_combo_box.currentIndex()
             filter_edit_text = self.filter_edit.text()
 
@@ -194,8 +195,9 @@ class ClientLookupWindow(LookupWindow):
 
     def __toggle_filter(self, filter_on: bool):
         """
-        Display filtering messages to the user if there data is being
-        filter or not though Pyside6 widgets such as, filter_label and filter_button.
+        Display filtering status messages to the user, whether data is being
+        filtered or not. Message is displayed through Pyside6 widgets such as,
+        filter_label and filter_button.
 
         Args:
             filter_on (boolean): If the current data is being filtered or not.
