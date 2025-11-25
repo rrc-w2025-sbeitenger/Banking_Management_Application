@@ -31,7 +31,7 @@ class BankAccount(Subject, ABC):
             account_number (int): Integer value representing the account number.
             client_number (int): Integer value representing the client number.
             balance (float): Float value representing the client's bank account balance.
-            date_created(date): The date of creation.
+            date_created (date): The date of creation.
 
         """
         #invoke the superclass init, so that _observer = [] is initialized.
@@ -65,7 +65,7 @@ class BankAccount(Subject, ABC):
         Accessor for account_number attribute.
 
         Returns:
-            int: The client's account number.
+            (int): The client's account number.
 
         """
         return self.__account_number
@@ -76,7 +76,7 @@ class BankAccount(Subject, ABC):
         Accessor for client_number attribute.
 
         Returns:
-            int: The client's number.
+            (int): The client's number.
 
         """
         return self.__client_number
@@ -87,7 +87,7 @@ class BankAccount(Subject, ABC):
         Accessor for balance attribute.
 
         Returns:
-            int: The client's account balance.
+            (int): The client's account balance.
 
         """
         return self.__balance
@@ -168,7 +168,7 @@ class BankAccount(Subject, ABC):
         information (object).
 
         Returns:
-            str: The informal string representation of client's bank information.
+            (str): The informal string representation of client's bank information.
 
         """
         return (f"Account Number: {self.__account_number}" 
@@ -187,7 +187,7 @@ class BankAccount(Subject, ABC):
         Append new observer to the subjects list of observers.
 
         Args:
-            observer(Observer): chooses the correct update interface from Observer.
+            observer (Observer): Chooses the correct update interface from Observer.
 
         """
         self._observers.append(observer)
@@ -197,7 +197,7 @@ class BankAccount(Subject, ABC):
         Remove existing observer from the subjects list of observers.
 
         Args:
-            observer(Observer): chooses the correct update interface from Observer.
+            observer (Observer): Chooses the correct update interface from Observer.
         
         """
         self._observers.remove(observer)
@@ -208,7 +208,7 @@ class BankAccount(Subject, ABC):
         iterating through the _observers list.
 
         Args:
-            message(str): Alert notification message.
+            message (str): Alert notification message.
 
         """
         for i in self._observers:

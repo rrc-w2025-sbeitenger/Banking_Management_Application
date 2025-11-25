@@ -1,4 +1,4 @@
-"""This module defines the ServiceChargeStrategy class."""
+"""Description: This module defines the ServiceChargeStrategy class."""
 
 __author__ = "Sven Beitenger"
 __version__ = "1.0.0"

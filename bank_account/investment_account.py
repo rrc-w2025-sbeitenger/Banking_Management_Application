@@ -52,7 +52,7 @@ class InvestmentAccount(BankAccount):
         informal string reresentation of investment bank account.
 
         Returns:
-            (str): account information, alongside account management
+            (str): Account information, alongside account management
             information.
 
         """

@@ -45,7 +45,7 @@ class SavingsAccount(BankAccount):
         informal string reresentation of savings bank account.
 
         Returns:
-            (str): account information, alongside account minimum
+            (str): Account information, alongside account minimum
             balance information.
 
         """

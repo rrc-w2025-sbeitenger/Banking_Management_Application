@@ -1,3 +1,4 @@
+"""Description: This module defines the ClientLookupWindow class."""
 __author__ = "ACE Faculty"
 __version__ = "1.0.0"
 __credits__ = "Sven Beitenger"

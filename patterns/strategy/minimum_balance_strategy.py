@@ -1,4 +1,4 @@
-"""This module defines the MinimumBalanceStrategy class."""
+"""Description: This module defines the MinimumBalanceStrategy class."""
 
 __author__ = "Sven Beitenger"
 __version__ = "1.0.0"
@@ -19,7 +19,7 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
         Initializes class attrbutes to argument values.
 
         Args:
-            minimum_balance(float): the minimum balance of the bank account.
+            minimum_balance (float): The minimum balance of the bank account.
         """
         self.__minimum_balance = minimum_balance
 
@@ -28,7 +28,7 @@ class MinimumBalanceStrategy(ServiceChargeStrategy):
         service charges for savings account.
 
         Args:
-            account(BankAcount): the client bank account of BankAccount class.
+            account (BankAcount): The client bank account of BankAccount class.
 
         Returns:
             service_charge (float): Service charge for clients bank account.

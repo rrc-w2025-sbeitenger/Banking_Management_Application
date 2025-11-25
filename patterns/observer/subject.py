@@ -1,4 +1,4 @@
-"""This module defines the Subject class."""
+"""Description: This module defines the Subject class."""
 #This class depends on the Observer.
 
 #imports

@@ -25,7 +25,7 @@ class ChequingAccount(BankAccount):
             account_number (int): Integer value representing the account number.
             client_number (int): Integer value representing the client number.
             balance (float): Float value representing the client's bank account balance.
-            date_created(date): The date of account creation.
+            date_created (date): The date of account creation.
             overdraft_limit (float): Overdraft Limit of how much money can be taken out.
             overdraft_rate (float): The pertectage rate of the overdraft.
         
@@ -77,7 +77,7 @@ class ChequingAccount(BankAccount):
         OverdraftStrategy, to calculate the service charges for client.
 
         Returns:
-            service_charge(float): Service charge for clients bank account.
+            service_charge (float): Service charge for clients bank account.
 
         """
         #calling calculate_service_charges with self, since self is an instance of the class,

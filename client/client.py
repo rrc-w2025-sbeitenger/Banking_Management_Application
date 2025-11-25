@@ -23,9 +23,9 @@ class Client(Observer):
 
         Args:
             client_number: An integer value representing the client number.
-            first_name: A string value the client's last name.
-            last_name: A  string value the client's last name.
-            email_address: A string value the client's email address.
+            first_name: String value of client's first name.
+            last_name: String value of client's last name.
+            email_address: String value of client's email address.
 
         """
         if isinstance(client_number, int):
@@ -59,7 +59,7 @@ class Client(Observer):
         Accessor for client_number attribute.
 
         Returns:
-            int: The client number.
+            (int): The client number.
         """
         return self.__client_number
     
@@ -69,7 +69,7 @@ class Client(Observer):
         Accessor for first_name attribute.
         
         Returns:
-            str: The client's first name.
+            (str): The client's first name.
         """
         return self.__first_name
     
@@ -79,7 +79,7 @@ class Client(Observer):
         Accessor for last_name attribute.
 
         Returns:
-            str: The client's last name.
+            (str): The client's last name.
         """
         return self.__last_name
     
@@ -89,7 +89,7 @@ class Client(Observer):
         Accessor for email_address attribute.
 
         Returns:
-            str: The client's email address.
+            (str): The client's email address.
         """
         return self.__email_address
     
@@ -99,7 +99,7 @@ class Client(Observer):
         information (object).
 
         Returns:
-            str: The informal string representation of client information.
+            (str): The informal string representation of client information.
         """
         
         return (f"{self.__last_name}, {self.__first_name}"

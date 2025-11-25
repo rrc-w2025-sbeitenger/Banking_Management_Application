@@ -1,4 +1,4 @@
-"""This module defines the OverdraftStrategy class."""
+"""Description: This module defines the OverdraftStrategy class."""
 
 __author__ = "Sven Beitenger"
 __version__ = "1.0.0"
@@ -17,8 +17,8 @@ class OverdraftStrategy(ServiceChargeStrategy):
         Initializes class attrbutes to argument values.
 
         Args:
-            overdraft_limit(float): Overdraft Limit of the amount that can be taken out.
-            overdraft_rate(float): The pertectage rate of the overdraft.
+            overdraft_limit (float): Overdraft Limit of the amount that can be taken out.
+            overdraft_rate (float): The pertectage rate of the overdraft.
         """
         self.__overdraft_limit = overdraft_limit
         self.__overdraft_rate = overdraft_rate
@@ -28,10 +28,10 @@ class OverdraftStrategy(ServiceChargeStrategy):
         Calculate the service charges for each client.
 
         Args:
-            account(BankAcount): the client bank account of BankAccount class.
+            account (BankAcount): The client bank account of BankAccount class.
             
         Returns:
-            service_charge(float): Service charge for clients bank account.
+            service_charge (float): Service charge for clients bank account.
 
         """
         if account.balance >= self.__overdraft_limit:
