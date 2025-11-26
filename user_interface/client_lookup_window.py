@@ -123,7 +123,7 @@ class ClientLookupWindow(LookupWindow):
         if account_number in self.__accounts:
             #obtain the bank account.
             bank_account = self.__accounts[account_number]
-            #intance of AccountDetailsWindows.
+            #instance of AccountDetailsWindows.
             accountWindow = AccountDetailsWindow(bank_account)
             #connect the signal object of AccountDetailWindow to update_data.
             accountWindow.balance_updated.connect(self.__update_data)
@@ -168,28 +168,28 @@ class ClientLookupWindow(LookupWindow):
         #filter out rows form the filter combobox selection.
         if self.filter_button.text() == "Apply Filter":
             #filter combobox index values are the same as the table columns index.
-            #When a selection is choosen in the filter combobox it's filtering by
+            #When a selection is chosen in the filter combobox it's filtering by
             #that column in the table.
             filter_combo_box_index = self.filter_combo_box.currentIndex()
             filter_edit_text = self.filter_edit.text()
 
             #iterate through account table.
             for row in range(self.account_table.rowCount()):
-                #check each table cells by row iteration, and using the filter combobox
+                #check each table item/cells by row iteration, and using the filter combobox
                 #index as the column.
-                table_cell = self.account_table.item(row, filter_combo_box_index)
-                #grab the text of the current table cell to compare to.
-                table_cell_text = table_cell.text()
+                table_item = self.account_table.item(row, filter_combo_box_index)
+                #grab the text of the current table item/cell to compare to.
+                table_item_text = table_item.text()
                 
-                #if the text in the filter_edit_text widget is NOT within the table cell,
+                #if the text in the filter_edit_text widget is NOT within the table item/cell,
                 #then hide it, else display it.
-                if filter_edit_text not in table_cell_text:
+                if filter_edit_text not in table_item_text:
                     self.account_table.setRowHidden(row, True)
                 else:
                     self.account_table.setRowHidden(row, False)
                 
-                #data is being filtered!
-                self.__toggle_filter(True)
+            #data is being filtered!
+            self.__toggle_filter(True)
         else:
             #data is not being filtered!
             self.__toggle_filter(False)
