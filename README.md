@@ -1,59 +1,65 @@
 # Intermediate Software Development Automated Teller Project
-This project will be developed over the course of several assignments.
-Each assignment will build on the work done in the previous assignment(s).
+This project will be developed over the course of several sprints.
+Each sprint will build on the work done in the previous sprint(s).
 Ultimately, an entire system will be created to manage bank transactions 
 for clients who have one or more bank accounts.
 
 ## Author
 Sven Beitenger
 
-## Assignment
-Assignment 1: This assignment will be using encapsulation and unit testing to 
+## Sprint
+Sprint 1: This sprint will be using encapsulation and unit testing to 
 build a client and bank account systems.
 
-Assignment 2: This assignment will be using superclasses and subclasses using
+Sprint 2: This sprint will be using superclasses and subclasses using
 inheritance hierarchy. Will include the use of polymorphism and abstraction.
 
-Assignment 3: This assignment will be using Strategy Patterns to simplify and 
-add scalability. And will add observer patterns to send notifications to clients.
+Sprint 3: This sprint will be using Strategy Patterns to simplify and 
+add scalability, including observer patterns to send notifications to clients.
 
-Assignment 4: This assignment will include a graphical user interface where users
+Sprint 4: This sprint will include a graphical user interface where users
 can select their bank account data and deposit or withdraw transactions.
 
 ## Encapsulation (A1):
-Encapsulation was achieved by making 'private' attributes. Name mangling the in
-the constructor by adding double underscore to the attributes, and then creating
-getter properties so I can access the attributes without accidentally bypassing
-encapsulation and messing with attribute directly. I am using getter properties
-so I can prevent direct access and raise valuerrors if the wrong argument was
-entered. Within all my functions in the BankAccount class I am using the
-name mangled attributes.
+Encapsulation was achieved by making the class attributes private through name mangling.
+In the constructor, I added double underscores (__) to the attributes, which prevents direct
+access from outside the class. I then created getter properties to provide controlled access
+to these attributes without bypassing encapsulation or modifying them directly. Getter properties
+also allow me to validate input and raise ValueError exceptions when invalid arguments are provided.
+Throughout the BankAccount class, all methods access the name-mangled attributes directly to maintain
+encapsulation and ensure consistent data handling.
 
 ## Polymorphism (A2):
-Polymorphism was achieved by implementing abstract classes and methods.
-Polymorphism allows subclasses to access the abstract method in the abstract
-superclass. I can declare the abstract get_service_charges method in the
-superclass and then each other subclass, such as ChequingAccount, InvementAccount,
-and SavingsAccount can implement this method differently. I used this to
-create different service charges for each account type.
+Polymorphism was achieved by implementing abstract classes and abstract methods. Polymorphism allows
+subclasses to provide their own implementation of a method that is declared in an abstract
+superclass. For example, I declared the abstract get_service_charges() method in the superclass,
+and each subclass, such as ChequingAccount, InvestmentAccount, and SavingsAccount, implements this
+method differently. This approach allows each account type to calculate and apply its own service
+charges while maintaining a consistent method interface across all account classes. As a result,
+the program can treat all account types uniformly while still executing account-specific behavior.
 
 ## Strategy Pattern (A3):
-Strategy Patterns are implemented to allow the classes which are inheriting from
-BankAccount to use interchangeable code/algorithms. Such as overdraft fees, management fees, and 
-minimum balance. Instead of hard coding them into each method, each strategy pattern has their
-respected code/algorithm, from which a class can then choose a strategy pattern. This reduces
-code redundancy, and supports "scalable when it comes to adding extra BankAccounts or new service
-charge rules" - Notes.
-Each class of the inherited BankAccount class is calling a certain strategy pattern to support their
-needed calculations within get_service_charges().
+The Strategy Pattern was implemented to allow classes that inherit from BankAccount to use interchangeable
+algorithms for calculating service charges. Examples of these algorithms include overdraft fees,
+management fees, and minimum balance fees. Instead of hard-coding these calculations into each
+account class, the logic is encapsulated within separate strategy classes, each responsible for
+its own calculation algorithm. This design reduces code redundancy and improves maintainability
+by separating business rules from the account classes. It also makes the system more scalable,
+as new account types or service charge rules can be added without modifying existing code.
+Each subclass that inherits from BankAccount selects and uses the appropriate strategy pattern
+to perform the calculations required by its get_service_charges() method. This allows account-specific
+behavior while promoting code reuse and flexibility.
 
 ## Observer Pattern (A3):
-Observer Pattern is implemented into the application so the client can be the observer of the BankAccount.
-The client inherits from the Observer class, and the BankAccount inherits from the Subject class.
-The Subject class is dependent on the observer class since if any changes happen that raise an alert, like
-withdrawing over the 9999.99 threshold, or being bellow the minimum balance limit the observer(client) wants to know.
-Since BankAccount is inheriting from Subjects, that means all the of BankAccounts subclass are also Subjects.
-SavingsAccount, ChequingsAccount, InvestmentAccounts are subjects which will notify the observer.
+The Observer Pattern was implemented in the application to allow the client to act as an observer of a BankAccount.
+The Client class inherits from the Observer class, while the BankAccount class inherits from the Subject class.
+The Subject class maintains a relationship with its observers and notifies them whenever significant events occur.
+For example, alerts are generated when a withdrawal exceeds the $9,999.99 threshold or when an account balance falls
+below the minimum required balance. In these situations, the observer (Client) is notified of the change.
+Since BankAccount inherits from Subject, all subclasses of BankAccount are also subjects. As a result,
+classes such as SavingsAccount, ChequingAccount, and InvestmentAccount can notify observers when account-specific
+events or alerts occur. This design promotes loose coupling between account objects and clients, allowing notifications
+to be sent automatically without requiring direct dependencies between the classes.
 
 ## Event-Driven programming paradigm (A4):
 Event-Driven programming was added into this application by creating event handlers methods and event listeners from pyside6.
@@ -66,18 +72,20 @@ the object of AccountDetailWindow to update_data. For example: The buttons widge
 button.clicked.connect.(@Slot()).
 
 ## Filtering Data and Creating Installer (A5):
-(Note that 'item' and 'cell' are used interchangeably in this context).
-Filtering was implemented into this program by iterating through the accounts table and checking if the chosen table item/cell
-has the filtered text within it. How is the chosen cell is selected? Each iteration of the account table is used as an index
-for the row, and the column is chosen by selecting the current filter_combo_box index. Filter_combo_box.currentIndex selects
-the current selected index which will be used for filtering -> Why does this work? Each selection/index of the filter_combo_box
-is a column in the accounts table such as account number, balance, creation date and account type. In other words the index of
-the combo_filter_box is the index of the column.
- 
-First the filter button text is checked if it is equal to the string "Apply Now", if so then the iteration process described
-above occurs. Once the cell is chosen then we can check if the current filtering text is within the current table cell, if it
-is NOT then it will hide the entire row else if it was true then we show the entire row.
-Finally we call the __toggle_filter with the argument of true to indicate that the data is being filtered, which will display
-to the user that the data is Filtered and prevents us from editing the filter without resetting first. If self.__toggle_filter had an
-augment of false it iterate through all the table rows and disable the hidden row allowing it to appear again.
+Note: In this context, the terms item and cell are used interchangeably.
+
+Filtering was implemented by iterating through each row of the accounts table and checking whether the selected
+table cell contains the filter text entered by the user. The selected cell is determined using the current row
+index from the iteration and the column index obtained from filter_combo_box.currentIndex().
+This approach works because each option in the filter_combo_box corresponds directly to a column in the accounts
+table, such as Account Number, Balance, Creation Date, or Account Type. In other words, the index of the selected
+combo box item matches the index of the column that should be filtered.
+
+When the filter button's text is set to "Apply Now", the filtering process begins. For each row, the program retrieves
+the value in the selected column and checks whether it contains the specified filter text. If the filter text is not
+found within the cell, the entire row is hidden. Otherwise, the row remains visible. After the filtering process is complete,
+the __toggle_filter(True) method is called to indicate that the table is currently filtered. This updates the user interface
+to show that a filter is active and prevents the filter criteria from being modified until the filter is reset.
+
+When __toggle_filter(False) is called, the filter is removed. The method iterates through all table rows, unhides any hidden rows, and restores the original table view so that all account records are visible again.
 
